@@ -1,17 +1,18 @@
 :root {
+  /* Beige canvas kept; contrast shifted to slate/charcoal + steel blue */
   --bg:            #f3e9d8;
   --bg-warm:       #efe1cb;
-  --surface:       #fbf5ea;
-  --surface-alt:   #f7eeddff;
-  --ink:           #3a2f25;
-  --ink-soft:      #6b5c4b;
-  --ink-faint:     #927f68;
-  --accent:        #b5773f;
-  --accent-deep:   #93582a;
-  --accent-soft:   #e8c9a0;
-  --line:          #e3d3ba;
-  --shadow:        0 18px 40px -24px rgba(90, 63, 33, 0.45);
-  --shadow-sm:     0 8px 22px -16px rgba(90, 63, 33, 0.5);
+  --surface:       #fbf6ec;
+  --surface-alt:   #f2ecdf;
+  --ink:           #212c38;
+  --ink-soft:      #4c5a68;
+  --ink-faint:     #7c8895;
+  --accent:        #3f6d9e;
+  --accent-deep:   #2a4a70;
+  --accent-soft:   #bdd1e6;
+  --line:          #ded4c2;
+  --shadow:        0 18px 40px -24px rgba(28, 42, 64, 0.42);
+  --shadow-sm:     0 8px 22px -16px rgba(28, 42, 64, 0.45);
 }
 
 * { box-sizing: border-box; }
@@ -100,7 +101,7 @@ header { padding: 72px 0 40px; }
 .badge .dot {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(181, 119, 63, 0.18);
+  box-shadow: 0 0 0 4px rgba(63, 109, 158, 0.20);
 }
 
 h1 {
@@ -119,6 +120,19 @@ h1 {
   margin: 0 auto;
 }
 @media (min-width: 721px) { .tagline { margin: 0; } }
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.hero-meta .sep { color: var(--accent-soft); }
+@media (max-width: 720px) { .hero-meta { justify-content: center; } }
 
 .hero-cta {
   display: flex;
@@ -140,7 +154,7 @@ h1 {
 }
 .btn-primary {
   background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
-  color: #fff7ec;
+  color: #f5f9fd;
   box-shadow: var(--shadow);
 }
 .btn-primary:hover { transform: translateY(-2px); color: #fff; }
@@ -163,7 +177,7 @@ h1 {
   position: absolute;
   inset: -14px;
   border-radius: 50%;
-  background: conic-gradient(from 140deg, var(--accent-soft), #f6e7cf, var(--accent-soft), #eecfa2, var(--accent-soft));
+  background: conic-gradient(from 140deg, var(--accent-soft), #eaf1f8, var(--accent-soft), #cbdcec, var(--accent-soft));
   filter: blur(2px);
   opacity: .9;
 }
@@ -186,7 +200,7 @@ h1 {
   font-size: 74px;
   font-weight: 600;
   color: var(--accent-deep);
-  background: radial-gradient(circle at 30% 25%, #fbf1df, #ead3ac);
+  background: radial-gradient(circle at 30% 25%, #eaf1f8, #c2d5e7);
   letter-spacing: 2px;
 }
 
@@ -280,7 +294,7 @@ section { padding: 50px 0; }
   border-radius: 50%;
   background: var(--surface);
   border: 3px solid var(--accent);
-  box-shadow: 0 0 0 4px rgba(181,119,63,.12);
+  box-shadow: 0 0 0 4px rgba(63,109,158,.14);
 }
 .job-top {
   display: flex;
@@ -391,6 +405,46 @@ section { padding: 50px 0; }
 .lang-row span:first-child { color: var(--ink); font-weight: 500; }
 .lang-row span:last-child { color: var(--ink-faint); font-size: 13px; }
 
+/* ---------- Organizations ---------- */
+.orgs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 720px) { .orgs { grid-template-columns: 1fr; } }
+.org-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.org-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.org-card .org-ic {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 20px;
+  background: var(--surface-alt);
+  border: 1px solid var(--accent-soft);
+  margin-bottom: 14px;
+}
+.org-card h3 {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 19px;
+  margin: 0 0 2px;
+  color: var(--ink);
+}
+.org-card .org-role {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  margin-bottom: 10px;
+}
+.org-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+
 /* ---------- Education strip ---------- */
 .edu {
   display: grid;
@@ -496,7 +550,7 @@ section { padding: 50px 0; }
 }
 .lock-form input:focus {
   border-color: var(--accent-soft);
-  box-shadow: 0 0 0 4px rgba(181,119,63,.14);
+  box-shadow: 0 0 0 4px rgba(63,109,158,.16);
 }
 .lock-form button {
   font-family: "Inter", sans-serif;
