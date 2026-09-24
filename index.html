@@ -1,33 +1,752 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Leonardo Ragogna</title>
+  <meta name="description" content="Leonardo Ragogna — UC Berkeley EECS. Robotics, embedded systems, and machine learning. Incoming researcher at ARPL." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      max-width: 750px;
-      margin: 80px auto;
-      padding: 0 24px;
-      font-family: system-ui, sans-serif;
-      line-height: 1.6;
-      background: #f7f8fa;
-      color: #202530;
+    :root {
+      --bg:            #f3e9d8;
+      --bg-warm:       #efe1cb;
+      --surface:       #fbf5ea;
+      --surface-alt:   #f7eeddff;
+      --ink:           #3a2f25;
+      --ink-soft:      #6b5c4b;
+      --ink-faint:     #927f68;
+      --accent:        #b5773f;
+      --accent-deep:   #93582a;
+      --accent-soft:   #e8c9a0;
+      --line:          #e3d3ba;
+      --shadow:        0 18px 40px -24px rgba(90, 63, 33, 0.45);
+      --shadow-sm:     0 8px 22px -16px rgba(90, 63, 33, 0.5);
     }
-    h1 { font-size: 42px; }
-    a { color: #2563eb; }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 700px at 78% -8%, #f7ecd7 0%, rgba(247,236,215,0) 60%),
+        radial-gradient(1000px 620px at -6% 12%, #f0e0c6 0%, rgba(240,224,198,0) 55%),
+        var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-deep); text-decoration: none; }
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(243, 233, 216, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .brand {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 0.2px;
+      color: var(--ink);
+    }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 26px; }
+    .nav-links a {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+    .nav-links a:hover { color: var(--accent-deep); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
+
+    /* ---------- Hero ---------- */
+    header { padding: 72px 0 40px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.5fr auto;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--accent-soft);
+      color: var(--accent-deep);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+    }
+    .badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(181, 119, 63, 0.18);
+    }
+
+    h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: clamp(40px, 7vw, 66px);
+      line-height: 1.02;
+      margin: 20px 0 14px;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+    }
+    .tagline {
+      font-size: clamp(17px, 2.4vw, 20px);
+      color: var(--ink-soft);
+      max-width: 40ch;
+      margin: 0 auto;
+    }
+    @media (min-width: 721px) { .tagline { margin: 0; } }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 720px) { .hero-cta { justify-content: center; } }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(180deg, var(--accent) 0%, var(--accent-deep) 100%);
+      color: #fff7ec;
+      box-shadow: var(--shadow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); color: #fff; }
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn-ghost:hover { transform: translateY(-2px); border-color: var(--accent-soft); }
+
+    /* ---------- Portrait ---------- */
+    .portrait {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      justify-self: center;
+    }
+    .portrait::before {
+      content: "";
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: conic-gradient(from 140deg, var(--accent-soft), #f6e7cf, var(--accent-soft), #eecfa2, var(--accent-soft));
+      filter: blur(2px);
+      opacity: .9;
+    }
+    .portrait img,
+    .portrait .fallback {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--surface);
+      box-shadow: var(--shadow);
+      display: block;
+    }
+    .portrait .fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Fraunces", serif;
+      font-size: 74px;
+      font-weight: 600;
+      color: var(--accent-deep);
+      background: radial-gradient(circle at 30% 25%, #fbf1df, #ead3ac);
+      letter-spacing: 2px;
+    }
+
+    /* ---------- Sections ---------- */
+    section { padding: 50px 0; }
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+    .section-head h2 {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: clamp(26px, 4vw, 34px);
+      margin: 0;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+    }
+    .section-head .rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--line), rgba(227,211,186,0));
+    }
+    .kicker {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ---------- About ---------- */
+    .about {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 34px 36px;
+      box-shadow: var(--shadow-sm);
+      font-size: 17.5px;
+      color: var(--ink-soft);
+    }
+    .about strong { color: var(--ink); font-weight: 600; }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 26px;
+    }
+    @media (max-width: 640px) { .facts { grid-template-columns: repeat(2, 1fr); } }
+    .fact {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .fact b {
+      display: block;
+      font-family: "Fraunces", serif;
+      font-size: 28px;
+      color: var(--accent-deep);
+      line-height: 1.1;
+    }
+    .fact span { font-size: 13px; color: var(--ink-faint); }
+
+    /* ---------- Timeline ---------- */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-soft), var(--line));
+    }
+    .job {
+      position: relative;
+      padding: 0 0 34px 42px;
+    }
+    .job::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 6px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 4px rgba(181,119,63,.12);
+    }
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+      align-items: baseline;
+    }
+    .job h3 {
+      font-size: 19px;
+      margin: 0;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .job .when {
+      font-size: 13.5px;
+      color: var(--ink-faint);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .job .role {
+      font-weight: 600;
+      color: var(--accent-deep);
+      font-size: 14.5px;
+      margin: 2px 0 12px;
+    }
+    .job ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 15.5px;
+    }
+    .job ul li { margin-bottom: 7px; }
+    .job ul li::marker { color: var(--accent-soft); }
+
+    /* ---------- Projects ---------- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: var(--shadow-sm);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card .tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .card h3 {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 21px;
+      margin: 8px 0 10px;
+      color: var(--ink);
+    }
+    .card p { margin: 0 0 14px; color: var(--ink-soft); font-size: 15px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--accent-deep);
+      background: var(--surface-alt);
+      border: 1px solid var(--accent-soft);
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    /* ---------- Skills ---------- */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 720px) { .skill-grid { grid-template-columns: 1fr; } }
+    .skill-col {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .skill-col h4 {
+      margin: 0 0 14px;
+      font-size: 15px;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .skill-col h4 .ic {
+      width: 26px; height: 26px; border-radius: 8px;
+      background: var(--surface-alt);
+      border: 1px solid var(--accent-soft);
+      display: grid; place-items: center;
+      font-size: 14px;
+    }
+    .skill-col .chips { gap: 8px; }
+    .langs { display: flex; flex-direction: column; gap: 12px; }
+    .lang-row { display: flex; justify-content: space-between; font-size: 15px; }
+    .lang-row span:first-child { color: var(--ink); font-weight: 500; }
+    .lang-row span:last-child { color: var(--ink-faint); font-size: 13px; }
+
+    /* ---------- Education strip ---------- */
+    .edu {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 720px) { .edu { grid-template-columns: 1fr; } }
+    .edu-card {
+      background: linear-gradient(155deg, var(--surface) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .edu-card h3 { font-family:"Fraunces",serif; margin: 0 0 4px; font-size: 22px; color: var(--ink); }
+    .edu-card .sub { color: var(--accent-deep); font-weight: 600; font-size: 15px; }
+    .edu-card .gpa {
+      float: right;
+      font-family: "Fraunces", serif;
+      font-size: 20px;
+      color: var(--accent-deep);
+    }
+    .award-list { margin: 16px 0 0; padding: 0; list-style: none; }
+    .award-list li {
+      padding: 7px 0;
+      border-top: 1px solid var(--line);
+      font-size: 14.5px;
+      color: var(--ink-soft);
+    }
+    .award-list li b { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Contact ---------- */
+    .contact {
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 48px 30px;
+      box-shadow: var(--shadow);
+    }
+    .contact h2 {
+      font-family: "Fraunces", serif;
+      font-size: clamp(28px, 5vw, 40px);
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+    .contact p { color: var(--ink-soft); margin: 0 auto 26px; max-width: 46ch; }
+    .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    footer {
+      text-align: center;
+      padding: 40px 0 50px;
+      color: var(--ink-faint);
+      font-size: 13.5px;
+    }
   </style>
 </head>
 <body>
-  <h1>Hi, I'm Leonardo.</h1>
-  <p>Berkeley EECS student interested in robotics and embedded systems.</p>
 
-  <h2>Projects</h2>
-  <ul>
-    <li>Autonomous Sorting Rover</li>
-    <li>ESP32 Manufacturing Tools</li>
-  </ul>
+  <nav>
+    <div class="wrap">
+      <div class="brand">Leonardo<span>.</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-  <a href="https://github.com/LRagogna">View my GitHub →</a>
+  <header>
+    <div class="wrap hero">
+      <div class="hero-text">
+        <div class="badge"><span class="dot"></span> Incoming Researcher @ ARPL</div>
+        <h1>Leonardo Ragogna</h1>
+        <p class="tagline">
+          EECS student at UC&nbsp;Berkeley building at the intersection of
+          <strong>robotics</strong>, <strong>embedded systems</strong>, and <strong>machine learning</strong>.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">See my work →</a>
+          <a class="btn btn-ghost" href="mailto:leonardo_ragogna@berkeley.edu">Get in touch</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <img src="assets/leonardo.jpg" alt="Leonardo Ragogna"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="fallback" style="display:none;">LR</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-head">
+        <div>
+          <div class="kicker">About</div>
+          <h2>Hi, I'm Leonardo.</h2>
+        </div>
+        <div class="rule"></div>
+      </div>
+      <div class="about">
+        I'm a <strong>B.S. Electrical Engineering &amp; Computer Sciences</strong> student at
+        UC&nbsp;Berkeley (GPA 3.81), and an <strong>incoming researcher at ARPL</strong>. My work spans
+        low-noise circuit design, autonomous robotics on ROS&nbsp;2, and Python data pipelines — from
+        hardware benches and PCB spins to computer-vision models and production-line automation. I like
+        problems that live where <strong>hardware meets software</strong>, and I care about building things
+        that are measured, reliable, and genuinely useful.
+      </div>
+      <div class="facts">
+        <div class="fact"><b>3.81</b><span>GPA / 4.0</span></div>
+        <div class="fact"><b>4+</b><span>Research &amp; industry roles</span></div>
+        <div class="fact"><b>500+</b><span>Units analyzed &amp; tracked</span></div>
+        <div class="fact"><b>4</b><span>Languages spoken</span></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Experience</div>
+          <h2>Where I've worked</h2>
+        </div>
+        <div class="rule"></div>
+      </div>
+      <div class="timeline">
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Bay Area Rapid Transit (BART)</h3>
+            <div class="when">Aug 2026 – Present · Berkeley, CA</div>
+          </div>
+          <div class="role">Student Researcher</div>
+          <ul>
+            <li>Developing Python pipelines in Jupyter to clean and structure traction-power SCADA telemetry, standardizing power-factor and energy metrics for reliability analysis.</li>
+            <li>Writing SQL queries to extract aggregate and phase-level measurements across 3 electrical phases, enabling comparison of substation operating patterns.</li>
+            <li>Automating preprocessing and data-quality checks with Python and AI-assisted workflows to produce clean datasets for traction-power research.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Dytran Instruments — Hottinger Brüel &amp; Kjær</h3>
+            <div class="when">May 2026 – Aug 2026 · Chatsworth, CA</div>
+          </div>
+          <div class="role">Engineering Intern</div>
+          <ul>
+            <li>Built a hardware–software time-study platform integrating an ESP32 performance tracker with Python analytics, processing 500+ units across 15+ product lines to automate reporting and visualize bottlenecks.</li>
+            <li>Optimized the highest-volume production line by integrating operator tasks with a 5-axis robotic assembly cell — cutting the process from 31 to 22 steps and saving 10 minutes per unit.</li>
+            <li>Performed frequency-response, noise, and functional testing on 150+ precision piezoelectric accelerometers, diagnosing and repairing failed units back to calibration.</li>
+            <li>Standardized a compressed-air leak reporting procedure flagging 60+ dB noise sources, driving corrective actions projected to save $10,000+ annually.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Neurotech@Berkeley — Flex EMG</h3>
+            <div class="when">Jan 2026 – May 2026 · Berkeley, CA</div>
+          </div>
+          <div class="role">Devices Hardware Engineer</div>
+          <ul>
+            <li>Engineered a low-noise EMG signal-acquisition system with active filters and ADC interfacing, achieving reliable biosignal capture over 5+ trials.</li>
+            <li>Ran circuit simulation in LTspice and completed 3 PCB design spins in KiCad, validating performance via waveform analysis.</li>
+            <li>Collaborated with an engineering team to evaluate design tradeoffs and integrate firmware over 12 weeks, qualifying 20+ electronic components.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Westminster Free Clinic</h3>
+            <div class="when">Apr 2022 – Aug 2025 · Thousand Oaks, CA</div>
+          </div>
+          <div class="role">Student Manager</div>
+          <ul>
+            <li>Coordinated nightly intake for 60+ Spanish-speaking patients across 150+ clinic nights, and built an electronic paging system that cut peak wait times by 20%.</li>
+            <li>Led administrative operations for the optometry program — scheduling, provider support, inventory, and distribution of 500+ prescription eyeglass pairs.</li>
+            <li>Analyzed 300+ healthcare records, identifying 225+ candidates for the SALUD assistance program to drive patient outreach and enrollment.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Projects</div>
+          <h2>Things I've built</h2>
+        </div>
+        <div class="rule"></div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="tag">Robotics · Independent</div>
+          <h3>Autonomous Object-Sorting Rover</h3>
+          <p>A modular rover that navigates toward and sorts objects in real time — from CAD chassis to a self-trained perception stack.</p>
+          <div class="chips">
+            <span class="chip">SolidWorks</span>
+            <span class="chip">ROS 2</span>
+            <span class="chip">YOLO</span>
+            <span class="chip">OpenCV</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="tag">Embedded · Analytics</div>
+          <h3>ESP32 Manufacturing Time-Study Platform</h3>
+          <p>Hardware performance tracker paired with Python analytics to time, visualize, and report on 500+ production units across 15+ lines.</p>
+          <div class="chips">
+            <span class="chip">ESP32</span>
+            <span class="chip">Python</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">Automation</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="tag">Biosignals · Hardware</div>
+          <h3>Flex EMG Acquisition System</h3>
+          <p>Low-noise EMG front end with active filtering and ADC interfacing, validated across three KiCad PCB spins and LTspice simulation.</p>
+          <div class="chips">
+            <span class="chip">KiCad</span>
+            <span class="chip">LTspice</span>
+            <span class="chip">Analog Design</span>
+            <span class="chip">Firmware</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="tag">Systems · Data</div>
+          <h3>BART Traction-Power Pipelines</h3>
+          <p>Python + SQL pipelines that clean SCADA telemetry and standardize energy metrics across electrical phases for reliability research.</p>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Jupyter</span>
+            <span class="chip">Data QA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Toolbox</div>
+          <h2>Skills &amp; languages</h2>
+        </div>
+        <div class="rule"></div>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-col">
+          <h4><span class="ic">⚙️</span> Engineering</h4>
+          <div class="chips">
+            <span class="chip">SolidWorks</span>
+            <span class="chip">KiCad</span>
+            <span class="chip">Altium</span>
+            <span class="chip">LTspice</span>
+            <span class="chip">SketchUp</span>
+            <span class="chip">Gazebo</span>
+            <span class="chip">Isaac Sim</span>
+            <span class="chip">Microcontrollers</span>
+            <span class="chip">Raspberry Pi</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <h4><span class="ic">💻</span> Software</h4>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">C / C++</span>
+            <span class="chip">Java</span>
+            <span class="chip">Assembly</span>
+            <span class="chip">ROS 2</span>
+            <span class="chip">PyTorch</span>
+            <span class="chip">OpenCV</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Linux</span>
+            <span class="chip">Git</span>
+            <span class="chip">Docker</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <h4><span class="ic">🌐</span> Languages</h4>
+          <div class="langs">
+            <div class="lang-row"><span>English</span><span>Native</span></div>
+            <div class="lang-row"><span>Spanish</span><span>C2 · Fluent</span></div>
+            <div class="lang-row"><span>Italian</span><span>C1 · Advanced</span></div>
+            <div class="lang-row"><span>Russian</span><span>B2 · Upper-Int.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Education</div>
+          <h2>Berkeley &amp; beyond</h2>
+        </div>
+        <div class="rule"></div>
+      </div>
+      <div class="edu">
+        <div class="edu-card">
+          <span class="gpa">3.81 / 4.0</span>
+          <h3>UC Berkeley</h3>
+          <div class="sub">B.S. Electrical Engineering &amp; Computer Sciences</div>
+          <ul class="award-list">
+            <li><b>Honors:</b> Regents' &amp; Chancellor's Scholar · Yardi Scholar · ACE Academic Excellence</li>
+            <li><b>Coursework:</b> Data Structures (CS61B) · Computer Architecture (CS61C) · Signal Processing (EECS16A) · Circuit Design (EE64) · Discrete Math &amp; Probability (CS70) · Linear Algebra (Math 54)</li>
+          </ul>
+        </div>
+        <div class="edu-card">
+          <h3>Certifications</h3>
+          <div class="sub">Training &amp; credentials</div>
+          <ul class="award-list">
+            <li><b>Lean Six Sigma Green Belt</b> — Process improvement &amp; automated reporting</li>
+            <li><b>AS9100 Quality Management</b> — Aerospace quality systems</li>
+            <li><b>HIPAA Compliance</b> — Patient privacy &amp; data protection</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact">
+        <h2>Let's build something.</h2>
+        <p>Open to research, robotics, and embedded/ML collaborations. The fastest way to reach me is email.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:leonardo_ragogna@berkeley.edu">leonardo_ragogna@berkeley.edu</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/leonardoragogna" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn btn-ghost" href="https://github.com/LRagogna" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+  </footer>
+
 </body>
 </html>
