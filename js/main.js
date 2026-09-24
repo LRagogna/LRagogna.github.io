@@ -1,4 +1,37 @@
 (function () {
+  /* ---- Robot boot-up intro ---- */
+  var intro = document.getElementById("intro");
+  if (intro) {
+    document.body.classList.add("intro-lock");
+    var reduce = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var launched = false;
+
+    function launch() {
+      if (launched) return;
+      launched = true;
+      intro.classList.add("booting");
+      var bootTime  = reduce ? 120 : 1300;   /* robot animation */
+      var leaveTime = reduce ? 260 : 940;    /* curtain lift */
+      setTimeout(function () {
+        intro.classList.add("leaving");
+        setTimeout(function () {
+          intro.style.display = "none";
+          document.body.classList.remove("intro-lock");
+        }, leaveTime);
+      }, bootTime);
+    }
+
+    intro.addEventListener("click", launch);
+    intro.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        launch();
+      }
+    });
+    try { intro.focus(); } catch (e) {}
+  }
+
   var SECRET = "turtles";
   var form  = document.getElementById("lockForm");
   var input = document.getElementById("lockInput");
