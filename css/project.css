@@ -1,0 +1,240 @@
+/* ================= Project detail pages ================= */
+
+.proj-nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.back-link:hover { color: var(--accent-deep); }
+.back-link .arrow { transition: transform .25s ease; }
+.back-link:hover .arrow { transform: translateX(-4px); }
+
+/* ---------- Project hero ---------- */
+.proj-hero { padding: 56px 0 26px; }
+.proj-hero .tag {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.proj-hero h1 {
+  font-size: clamp(32px, 6vw, 52px);
+  margin: 12px 0 16px;
+  max-width: 20ch;
+}
+.proj-lead {
+  font-size: clamp(17px, 2.3vw, 20px);
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 0;
+}
+.proj-lead strong { color: var(--ink); font-weight: 600; }
+
+.proj-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 22px;
+  font-size: 14px;
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+.proj-meta span { display: inline-flex; align-items: center; gap: 7px; }
+.proj-meta .sep { color: var(--accent-soft); }
+
+.proj-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+/* ---------- Body ---------- */
+.proj-body { padding-bottom: 40px; }
+.proj-body section {
+  padding: 0;
+  margin-bottom: 46px;
+}
+.proj-body h2 {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: clamp(22px, 3.4vw, 28px);
+  color: var(--ink);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.proj-body h2 .num {
+  color: var(--accent);
+  font-size: 0.7em;
+  margin-right: 10px;
+  vertical-align: 2px;
+}
+.proj-body h3 {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 22px 0 6px;
+}
+.proj-body p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  margin: 10px 0;
+  max-width: 68ch;
+}
+.proj-body p strong { color: var(--ink); font-weight: 600; }
+.proj-body a { color: var(--accent-deep); font-weight: 500; }
+.proj-body a:hover { color: var(--accent); }
+
+.sect-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-soft), rgba(227,211,186,0));
+  margin: 0 0 22px;
+}
+
+/* Bulleted feature lists */
+.proj-list {
+  margin: 12px 0;
+  padding-left: 20px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  max-width: 68ch;
+}
+.proj-list li { margin-bottom: 9px; }
+.proj-list li::marker { color: var(--accent); }
+.proj-list li strong { color: var(--ink); font-weight: 600; }
+
+/* Highlight / stat tiles */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin: 6px 0 4px;
+}
+.stat {
+  background: linear-gradient(155deg, var(--surface) 0%, var(--surface-alt) 100%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.stat b {
+  display: block;
+  font-family: "Fraunces", serif;
+  font-size: 26px;
+  color: var(--accent-deep);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.stat span { font-size: 13.5px; color: var(--ink-faint); }
+
+/* Domain / feature cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 6px 0;
+}
+.feature {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+.feature .feature-ic {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 19px;
+  background: var(--surface-alt);
+  border: 1px solid var(--accent-soft);
+  margin-bottom: 12px;
+}
+.feature h3 { margin: 0 0 6px; font-size: 16px; }
+.feature p { margin: 0; font-size: 14.5px; }
+
+/* Flow / architecture strip */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+  margin: 10px 0;
+}
+.flow-step {
+  flex: 1 1 130px;
+  background: var(--surface);
+  border: 1px solid var(--accent-soft);
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.flow-step .fs-k {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.flow-step .fs-t { font-size: 14px; color: var(--ink); font-weight: 600; margin-top: 4px; }
+.flow-step .fs-d { font-size: 12.5px; color: var(--ink-faint); margin-top: 4px; }
+.flow-arrow { display: grid; place-items: center; color: var(--accent-soft); font-size: 18px; }
+@media (max-width: 640px) {
+  .flow { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+
+/* Tech stack chips block */
+.stack-block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: var(--shadow-sm);
+}
+.stack-row { margin-bottom: 16px; }
+.stack-row:last-child { margin-bottom: 0; }
+.stack-row .stack-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 9px;
+}
+
+/* Callout */
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 14px 14px 0;
+  padding: 16px 20px;
+  margin: 18px 0;
+  color: var(--ink-soft);
+  font-size: 15px;
+  box-shadow: var(--shadow-sm);
+}
+.callout strong { color: var(--ink); }
+
+/* Bottom nav between projects */
+.proj-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 30px 0 10px;
+}

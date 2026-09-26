@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ESP32 Time-Study System · Leonardo Ragogna</title>
+  <meta name="description" content="A portable ESP32 time-study system that turns production instructions into operator-controlled time studies — combining a battery-powered handheld terminal, custom electronics and enclosure, embedded firmware, and a Windows desktop application." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <nav class="proj-nav">
+    <div class="wrap">
+      <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to projects</a>
+      <div class="brand">Leonardo<span>.</span></div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <header class="proj-hero">
+      <div class="tag">Embedded · Analytics</div>
+      <h1>Portable ESP32 Time-Study System</h1>
+      <p class="proj-lead">
+        An end-to-end engineering project that turns production instructions into
+        <strong>portable, operator-controlled time studies</strong>. The system combines a battery-powered
+        ESP32 terminal, custom electronics and enclosure design, embedded firmware, and a Windows desktop
+        application for creating, recording, reviewing, and exporting study data.
+      </p>
+      <div class="proj-meta">
+        <span>🏭 Dytran Instruments — Hottinger Brüel &amp; Kjær</span>
+        <span class="sep">·</span>
+        <span>Engineering Intern · Summer 2026</span>
+      </div>
+      <div class="proj-actions">
+        <a class="btn btn-primary" href="https://github.com/LRagogna/Dytran-Internship----ESP32-Project" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="btn btn-ghost" href="../index.html#projects">All projects</a>
+      </div>
+    </header>
+
+    <div class="proj-body">
+
+      <section>
+        <h2>Engineering outcome</h2>
+        <div class="sect-rule"></div>
+        <p>
+          This project replaced a centralized, manually coordinated timing process with a portable workflow
+          that can be used directly at the workstation. A single system now supports the full path from study
+          creation to recorded results — integrating mechanical design, electronics, embedded programming,
+          desktop software, serial communication, and structured data export into one deployable tool.
+        </p>
+        <div class="flow">
+          <div class="flow-step"><div class="fs-k">1 · Select</div><div class="fs-t">Study document</div><div class="fs-d">sanitized Job Traveler</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">2 · Parse</div><div class="fs-t">Desktop app</div><div class="fs-d">operations → editable steps</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">3 · Transfer</div><div class="fs-t">USB serial</div><div class="fs-d">study → ESP32</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">4 · Record</div><div class="fs-t">Handheld terminal</div><div class="fs-d">operator times each step</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">5 · Export</div><div class="fs-t">CSV / Excel</div><div class="fs-d">review &amp; download</div></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Key accomplishments</h2>
+        <div class="sect-rule"></div>
+        <ul class="proj-list">
+          <li>Designed and built a <strong>portable ESP32 operator terminal</strong> for decentralized time collection.</li>
+          <li>Developed a custom 3D-printed enclosure in <strong>SolidWorks</strong> around the display, controls, battery system, and internal electronics.</li>
+          <li>Created a <strong>three-button interface</strong> that lets operators select studies, move between steps, and start/stop timing without a keyboard.</li>
+          <li>Implemented <strong>local CSV storage</strong> so studies remain available directly on the ESP32.</li>
+          <li>Defined a lightweight <strong>serial command protocol</strong> between the Windows application and the embedded device.</li>
+          <li>Built a desktop application for study creation, file management, CSV preview, deletion, and Excel export.</li>
+          <li>Added editable step previews so users can correct, reorder, remove, or add operations before transferring a study.</li>
+          <li>Developed the system for use <strong>across multiple manufacturing departments</strong>, demonstrating the design could scale beyond a single workstation.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Hardware</h2>
+        <div class="sect-rule"></div>
+        <p>
+          The custom AFE packages the ESP32, display, physical controls, battery hardware, and interface
+          electronics into a portable 3D-printed enclosure. A custom interface PCB organizes the ESP32 headers,
+          display and control connections, power components, and enclosure mounting points; the 3D board view
+          was used to review component placement and mechanical integration before assembly.
+        </p>
+        <ul class="proj-list">
+          <li><strong>ESP32-D DevKit</strong> development board</li>
+          <li><strong>3.2-inch display</strong> with three momentary pushbuttons and an on/off power switch</li>
+          <li><strong>Dual-18650 battery holder</strong> and charging board with 2.5 mm JST-EH connectors</li>
+          <li><strong>Custom interface PCB</strong> and a SolidWorks-designed 3D-printed enclosure</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Software</h2>
+        <div class="sect-rule"></div>
+
+        <h3>ESP32 firmware</h3>
+        <p>
+          The firmware provides the on-device workflow and file-management layer: it displays stored studies and
+          step information, uses physical buttons for menu navigation and timing control, accumulates elapsed time
+          for each operation, stores study definitions and results as CSV files, and responds to commands from the
+          desktop application over a 115200-baud serial connection.
+        </p>
+
+        <h3>Windows Study Manager</h3>
+        <p>
+          The desktop application is written in Python and uses a local HTML/CSS/JavaScript interface through
+          <code>pywebview</code>. It provides four main workflows: a <strong>Home</strong> screen that detects the
+          connected ESP32 and shows device status; <strong>Create Study</strong>, which parses a study document,
+          previews its steps, and uploads the final study; <strong>Current Studies</strong>, which lists stored CSV
+          files and previews recorded results; and <strong>Export</strong>, which combines selected studies into an
+          Excel workbook with one worksheet per study.
+        </p>
+        <div class="callout">
+          Results use a straightforward CSV structure — <strong>step number, description, and time (mm:ss)</strong> —
+          keeping the device implementation lightweight while making the data easy to inspect, archive, and analyze.
+        </div>
+      </section>
+
+      <section>
+        <h2>Disciplines demonstrated</h2>
+        <div class="sect-rule"></div>
+        <div class="stack-block">
+          <div class="stack-row">
+            <div class="stack-label">Embedded &amp; electronics</div>
+            <div class="chips">
+              <span class="chip">ESP32 / C++</span>
+              <span class="chip">PCB schematic + layout</span>
+              <span class="chip">USB serial protocol</span>
+              <span class="chip">Battery integration</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Mechanical</div>
+            <div class="chips">
+              <span class="chip">SolidWorks</span>
+              <span class="chip">3D printing</span>
+              <span class="chip">Enclosure design</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Software &amp; data</div>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">pywebview</span>
+              <span class="chip">HTML / CSS / JS</span>
+              <span class="chip">CSV / Excel export</span>
+              <span class="chip">PyInstaller</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="proj-foot">
+        <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to all projects</a>
+        <a class="btn btn-ghost" href="https://github.com/LRagogna/Dytran-Internship----ESP32-Project" target="_blank" rel="noopener">Repository</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+  </footer>
+
+
+  <script src="../js/cursor.js"></script>
+</body>
+</html>

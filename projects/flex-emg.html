@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flex-EMG · Leonardo Ragogna</title>
+  <meta name="description" content="A wearable surface-electromyography (sEMG) platform that reads forearm muscle activity, cleans it with a real-time digital filter chain, and classifies hand gestures with a lightweight ML model — spanning a custom analog front-end PCB, ESP32 firmware, and a Python backend." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <nav class="proj-nav">
+    <div class="wrap">
+      <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to projects</a>
+      <div class="brand">Leonardo<span>.</span></div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <header class="proj-hero">
+      <div class="tag">Biosignals · Hardware</div>
+      <h1>Flex-EMG Acquisition System</h1>
+      <p class="proj-lead">
+        A wearable surface-electromyography (sEMG) platform that <strong>reads muscle activity from the
+        forearm</strong>, cleans it with a real-time digital filter chain, and classifies hand gestures using a
+        lightweight machine-learning model. It spans the full stack: a custom analog front-end PCB, ESP32
+        firmware that streams ADC samples over WiFi, and a Python backend that filters the signal, recognizes
+        gestures, and broadcasts results over WebSocket.
+      </p>
+      <div class="proj-meta">
+        <span>🧠 Neurotech @ Berkeley — Flex-EMG</span>
+        <span class="sep">·</span>
+        <span>Devices Hardware Engineer · Spring 2026</span>
+      </div>
+      <div class="proj-actions">
+        <a class="btn btn-primary" href="https://github.com/LRagogna/Flex-EMG" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="btn btn-ghost" href="../index.html#projects">All projects</a>
+      </div>
+    </header>
+
+    <div class="proj-body">
+
+      <section>
+        <h2>How it works</h2>
+        <div class="sect-rule"></div>
+        <p>
+          Microvolt-level EMG signals from surface electrodes are conditioned by a custom analog front-end,
+          digitized by a 24-bit ADC, streamed off the ESP32, filtered in real time, and classified into gestures —
+          then fanned out live to any client over WebSocket.
+        </p>
+        <div class="flow">
+          <div class="flow-step"><div class="fs-k">Sense</div><div class="fs-t">Surface electrodes</div><div class="fs-d">forearm muscles</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Condition</div><div class="fs-t">Analog front-end PCB</div><div class="fs-d">instrumentation amp → 24-bit ADC</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Stream</div><div class="fs-t">ESP32-C3 firmware</div><div class="fs-d">samples over WiFi / serial</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Process</div><div class="fs-t">Python backend</div><div class="fs-d">filter → features → LDA classifier</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Broadcast</div><div class="fs-t">WebSocket</div><div class="fs-d">live frames to clients</div></div>
+        </div>
+        <div class="callout">
+          Each processed frame is streamed as JSON with a timestamp, raw and filtered values, the recognized
+          <strong>gesture</strong>, and a <strong>confidence</strong> score — ready for dashboards, notebooks, or viewers.
+        </div>
+      </section>
+
+      <section>
+        <h2>Hardware — the analog front-end</h2>
+        <div class="sect-rule"></div>
+        <p>
+          The custom AFE board conditions a microvolt-level EMG signal into a clean digital stream. The KiCad
+          source — schematic, layout, footprints, and BOM — lives in the repository, and the board was assembled
+          in-house on a reflow + rework bench with placement checked under a microscope.
+        </p>
+        <ul class="proj-list">
+          <li><strong>ADS1220</strong> — 24-bit delta-sigma ADC with integrated PGA</li>
+          <li><strong>OPA4322</strong> — quad precision op-amps for the analog filter / gain stages</li>
+          <li><strong>MCP4141</strong> — digital potentiometer for programmable gain</li>
+          <li><strong>ESP32-C3</strong> — onboard wireless MCU for sampling and streaming</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Software — signal processing &amp; ML</h2>
+        <div class="sect-rule"></div>
+        <p>
+          The Python backend is a modular real-time pipeline. A single config module is the source of truth for
+          sample rate, filter, and connection settings; the signal processor applies a bandpass (20–500 Hz) plus a
+          60 Hz notch filter chain using SciPy SOS; the ESP32 client reads over WiFi/serial with auto-reconnect;
+          and the classifier turns the cleaned signal into gestures.
+        </p>
+        <ul class="proj-list">
+          <li><strong>Real-time filtering</strong> — 20–500 Hz bandpass + 60 Hz notch (SciPy second-order sections).</li>
+          <li><strong>Gesture classification</strong> — Hudgins time-domain features feeding a StandardScaler + LDA pipeline.</li>
+          <li><strong>WebSocket server</strong> — fans processed frames out to all connected clients.</li>
+          <li><strong>Hardware-free simulator</strong> — a live viewer and training UI so the full pipeline can be developed and demoed without a board attached.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tech stack</h2>
+        <div class="sect-rule"></div>
+        <div class="stack-block">
+          <div class="stack-row">
+            <div class="stack-label">Hardware</div>
+            <div class="chips">
+              <span class="chip">KiCad</span>
+              <span class="chip">ADS1220 ADC</span>
+              <span class="chip">OPA4322</span>
+              <span class="chip">Analog front-end design</span>
+              <span class="chip">SMD reflow assembly</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Firmware</div>
+            <div class="chips">
+              <span class="chip">ESP32-C3</span>
+              <span class="chip">WiFi / serial streaming</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Backend &amp; ML</div>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">SciPy</span>
+              <span class="chip">LDA classifier</span>
+              <span class="chip">WebSocket</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Team</h2>
+        <div class="sect-rule"></div>
+        <p>
+          Built by the <strong>Neurotech at Berkeley</strong> Flex-EMG team, Spring 2026: Alex Wong, Sean Isomatsu,
+          Leo Ragogna, Abhay Bharnidharka, Kabeer Nayyar, and Edgar Amazcua.
+        </p>
+      </section>
+
+      <div class="proj-foot">
+        <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to all projects</a>
+        <a class="btn btn-ghost" href="https://github.com/LRagogna/Flex-EMG" target="_blank" rel="noopener">Repository</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+  </footer>
+
+
+  <script src="../js/cursor.js"></script>
+</body>
+</html>

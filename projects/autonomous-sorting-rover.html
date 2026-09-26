@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Autonomous Sorting Rover · Leonardo Ragogna</title>
+  <meta name="description" content="A ground-up autonomous robot that finds real-world objects with a custom-trained vision model, drives to them with closed-loop wheel odometry, and collects them — spanning CAD, embedded firmware, ROS 2 motion control, and a full computer-vision MLOps pipeline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <nav class="proj-nav">
+    <div class="wrap">
+      <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to projects</a>
+      <div class="brand">Leonardo<span>.</span></div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <header class="proj-hero">
+      <div class="tag">Robotics · Independent</div>
+      <h1>Autonomous Object-Sorting Rover</h1>
+      <p class="proj-lead">
+        A ground-up autonomous robot that <strong>finds real-world objects with a custom-trained
+        vision model</strong>, drives to them with closed-loop wheel odometry, and collects them.
+        It spans mechanical CAD, embedded firmware, motion control, and a full computer-vision pipeline —
+        four subsystems designed to compose on real hardware through clean, swappable interfaces.
+      </p>
+      <div class="proj-meta">
+        <span>🤖 Perception · Mobility · Manipulation · Control</span>
+        <span class="sep">·</span>
+        <span>Python · C/C++ · ROS 2 · YOLOv8</span>
+      </div>
+      <div class="proj-actions">
+        <a class="btn btn-primary" href="https://github.com/LRagogna/Autonomous-Sorting-Rover" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="btn btn-ghost" href="../index.html#projects">All projects</a>
+      </div>
+    </header>
+
+    <div class="proj-body">
+
+      <section>
+        <h2>Overview</h2>
+        <div class="sect-rule"></div>
+        <p>
+          This is the complete engineering record of an autonomous rover: the SolidWorks parts, the
+          Arduino motor and sensor firmware, a ROS 2 control stack, a custom-trained YOLO object detector,
+          and a browser-based MLOps platform that runs the entire data-to-deployment loop. The seams
+          between subsystems are deliberate — perception publishes detections, control converts intent to a
+          body-frame velocity, and the drive layer turns that velocity into motor commands. Each boundary is
+          a single, well-defined interface, so any one subsystem can be swapped or simulated without touching
+          the others.
+        </p>
+      </section>
+
+      <section>
+        <h2>What it demonstrates</h2>
+        <div class="sect-rule"></div>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-ic">📐</div>
+            <h3>Mechanical design (CAD)</h3>
+            <p>Custom SolidWorks parts — a Pi enclosure with cooling clearance, an angled camera mount, a chassis bridge, and a collection funnel — modeled parametrically and exported to STL/STEP for 3D printing.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">⚡</div>
+            <h3>Embedded / electrical</h3>
+            <p>Arduino firmware driving a dual-motor H-bridge over PWM; a non-blocking, timer-based motion controller with calibrated in-place turns; a relay-driven electromagnet end-effector; a Pi ↔ Arduino serial link.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">🎯</div>
+            <h3>Sensing &amp; controls</h3>
+            <p>Closed-loop wheel odometry from a TCRT5000 IR encoder with real signal-conditioning, differential-drive kinematics, and a native ROS 2 Humble control stack.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">👁️</div>
+            <h3>Computer vision / ML</h3>
+            <p>A YOLOv8 detector trained on self-recorded data (bit, wrench, jenga, screwdriver, car) with a human-in-the-loop labeling and retraining workflow.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">🔁</div>
+            <h3>Software / MLOps</h3>
+            <p>An 8-stage Training Control Center that owns upload → auto-label → review → versioned training → live test → hard-negative retraining → deploy, with a model registry and leakage-safe dataset splitting.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">🧩</div>
+            <h3>Systems integration</h3>
+            <p>Four subsystems — perception, mobility, manipulation, and control — composed on real hardware through clean, swappable interfaces.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>System architecture</h2>
+        <div class="sect-rule"></div>
+        <p>
+          The autonomous loop moves from what the camera sees to how the wheels turn, with a single
+          integration point — <strong>a <code>Twist</code> velocity on <code>/cmd_vel</code></strong> — that any
+          command source (keyboard or the autonomous brain) drops straight into.
+        </p>
+        <div class="flow">
+          <div class="flow-step"><div class="fs-k">Perceive</div><div class="fs-t">OV5647 camera</div><div class="fs-d">→ YOLOv8 detector</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Decide</div><div class="fs-t">Rover logic (Pi 4)</div><div class="fs-d">search / approach / pickup</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Command</div><div class="fs-t">ROS 2 kinematics</div><div class="fs-d">Twist → left,right PWM</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Act</div><div class="fs-t">Arduino + motors</div><div class="fs-d">+ electromagnet pickup</div></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Subsystem deep-dives</h2>
+        <div class="sect-rule"></div>
+
+        <h3>1 · Mechanical design — SolidWorks</h3>
+        <p>
+          Every custom bracket on the rover is designed in SolidWorks rather than improvised, so the
+          mechanical layout evolves in lockstep with the electronics: a fixed Raspberry Pi 4 mount with
+          cooling clearance, an angled mount that fixes the OV5647 at a controlled downward tilt so the
+          detector always sees the ground plane from a known viewpoint, a structural chassis bridge, and a
+          collection funnel. Parts are authored natively and exported to neutral STL/STEP for printing and
+          sharing, keeping the design reproducible.
+        </p>
+
+        <h3>2 · Electronics &amp; embedded firmware</h3>
+        <p>
+          The Arduino runs a <strong>non-blocking</strong> motion controller — no <code>delay()</code> anywhere
+          in the control loop — so serial input is always responsive and a turn can be aborted mid-motion. It
+          drives a dual H-bridge with separate cruise and turn PWM levels chosen so the wheels scrub cleanly
+          instead of stalling, and executes in-place turns from a single measured "milliseconds per 90°"
+          calibration constant that scales to any commanded angle. A relay-controlled electromagnet
+          end-effector collects metal objects.
+        </p>
+
+        <h3>3 · Wheel odometry — closed-loop distance control</h3>
+        <p>
+          To turn "go forward one foot" into a <em>measured</em> foot, the rover reads a TCRT5000 IR
+          reflectance sensor watching tape marks on a 2.6″ wheel. Geometry gives
+          <code>inches_per_pulse = π · diameter / pulses_per_rev</code>, so the controller drives until it has
+          counted enough pulses — a genuine closed loop on distance, not a timed guess. A pulse only registers
+          after the sensor reads white continuously for a minimum duration, rejecting glints, seams, and
+          reflections, with an additional pulse-gap guard for proper debouncing.
+        </p>
+
+        <h3>4 · Motion control &amp; ROS 2</h3>
+        <p>
+          A native ROS 2 Humble stack implements both manual teleop and the autonomous perception pipeline.
+          Pure <code>Twist (v, ω) → (left, right)</code> kinematics live in a module with zero ROS or hardware
+          dependencies — which is what makes it reusable, unit-testable, and shared verbatim by the simulated
+          and the real motor node. The perception pipeline is <strong>target-locked</strong>: the rover only
+          approaches the one object class it was told to, never "whatever it happens to see." A live overlay
+          window shows the detection box, the LEFT/RIGHT motor values, a turn/forward/stop indicator, and an
+          odometry mini-map tracing the path. Two workspaces share the same nodes — a development copy on a
+          laptop webcam and an on-robot copy whose <code>arduino_bridge_node</code> writes to the real motors
+          over serial.
+        </p>
+
+        <h3>5 · Perception — custom YOLO detector</h3>
+        <p>
+          The detector is trained entirely on the rover's own recordings, not a stock dataset. YOLOv8 is
+          fine-tuned to five classes (bit, wrench, jenga, screwdriver, car) from self-recorded, human-reviewed
+          images across multiple versioned models, and negative/background images are first-class training data
+          so the model is explicitly taught what "nothing" looks like.
+        </p>
+
+        <h3>6 · Training Control Center — an end-to-end ML platform</h3>
+        <p>
+          The most substantial piece of software here is a self-built <strong>MLOps platform</strong> that runs
+          the whole model lifecycle from a browser, backed only by the Python standard library. It owns eight
+          stages: upload clips → process dataset (extract frames, auto-draw boxes with classical CV) → review /
+          edit labels → versioned training → test detector → retraining queue (hard-negative mining) → deploy →
+          a guarded danger zone. The train/val split is by whole source video, never by frame, so near-identical
+          frames can't leak across the split and inflate metrics, and models are versioned and never overwritten.
+        </p>
+      </section>
+
+      <section>
+        <h2>Current status</h2>
+        <div class="sect-rule"></div>
+        <ul class="proj-list">
+          <li><strong>Physical rover built</strong> — tank-drive chassis, Raspberry Pi 4, OV5647 camera, Arduino motor control over serial, relay + electromagnet bench-proven.</li>
+          <li><strong>Vision working</strong> across the object classes from self-recorded, human-reviewed data, with multiple versioned models tracked by metrics.</li>
+          <li><strong>ROS 2 stack running end-to-end in simulation</strong> — full perception pipeline plus dead-reckoning odometry and a live overlay, driven by two one-command laptop demos.</li>
+          <li><strong>Wheel odometry firmware</strong> written and in bring-up, to ground-truth the ROS dead-reckoning.</li>
+          <li><strong>Next:</strong> wire the ROS 2 serial bridge to hardware and compose a first end-to-end search → approach → pickup run.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tech stack</h2>
+        <div class="sect-rule"></div>
+        <div class="stack-block">
+          <div class="stack-row">
+            <div class="stack-label">Mechanical</div>
+            <div class="chips">
+              <span class="chip">SolidWorks</span>
+              <span class="chip">STL / STEP</span>
+              <span class="chip">3D printing</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Embedded &amp; controls</div>
+            <div class="chips">
+              <span class="chip">Arduino / C++</span>
+              <span class="chip">PWM H-bridge</span>
+              <span class="chip">IR wheel odometry</span>
+              <span class="chip">Serial protocol</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Software &amp; ML</div>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">ROS 2 Humble</span>
+              <span class="chip">YOLOv8</span>
+              <span class="chip">OpenCV</span>
+              <span class="chip">Raspberry Pi</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="proj-foot">
+        <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to all projects</a>
+        <a class="btn btn-ghost" href="https://github.com/LRagogna/Autonomous-Sorting-Rover" target="_blank" rel="noopener">Repository</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+  </footer>
+
+
+  <script src="../js/cursor.js"></script>
+</body>
+</html>
