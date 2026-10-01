@@ -190,6 +190,7 @@ h1 {
   height: 230px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 22%;
   border: 5px solid var(--surface);
   box-shadow: var(--shadow);
   display: block;
@@ -460,7 +461,7 @@ section { padding: 50px 0; }
 /* ---------- Skills ---------- */
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 @media (max-width: 720px) { .skill-grid { grid-template-columns: 1fr; } }
@@ -507,13 +508,10 @@ section { padding: 50px 0; }
 }
 .org-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .org-card .org-ic {
-  width: 42px; height: 42px;
-  border-radius: 12px;
-  display: grid; place-items: center;
-  font-size: 20px;
-  background: var(--surface-alt);
-  border: 1px solid var(--accent-soft);
-  margin-bottom: 14px;
+  width: 34px; height: 4px;
+  border-radius: 999px;
+  background: var(--accent);
+  margin-bottom: 16px;
 }
 .org-card h3 {
   font-family: "Fraunces", serif;
@@ -598,7 +596,7 @@ section { padding: 50px 0; }
   margin: 0 auto 14px;
   border-radius: 16px;
   display: grid; place-items: center;
-  font-size: 26px;
+  color: var(--accent-deep);
   background: var(--surface-alt);
   border: 1px solid var(--accent-soft);
 }

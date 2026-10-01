@@ -32,7 +32,7 @@
         four subsystems designed to compose on real hardware through clean, swappable interfaces.
       </p>
       <div class="proj-meta">
-        <span>🤖 Perception · Mobility · Manipulation · Control</span>
+        <span>Perception · Mobility · Manipulation · Control</span>
         <span class="sep">·</span>
         <span>Python · C/C++ · ROS 2 · YOLOv8</span>
       </div>
@@ -43,6 +43,72 @@
     </header>
 
     <div class="proj-body">
+
+      <section class="proj-gallery">
+        <h2>Walkthrough</h2>
+        <div class="sect-rule"></div>
+        <p class="gintro">A walk through the build — from the <strong>mechanical assembly</strong> to the <strong>Training Control Center</strong> and a <strong>live demo</strong> of the perception stack.</p>
+        <div class="gallery" data-gallery>
+          <button class="gbtn gprev" aria-label="Previous slide">←</button>
+          <div class="gviewport">
+            <div class="gtrack">
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-assembled.jpg" alt="The assembled autonomous sorting rover" loading="eager" fetchpriority="high" />
+                </div>
+                <figcaption><span class="gcap-k">01</span>The assembled rover: a tank-drive chassis carrying a <strong>Raspberry Pi 4</strong>, an OV5647 camera on a printed mount, Arduino motor control, and a relay-driven electromagnet.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-cad.jpg" alt="OV5647 camera on a 3D-printed mount above the Raspberry Pi" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">02</span>The camera and compute stack — an OV5647 on a <strong>3D-printed angled mount</strong> (modeled in SolidWorks) that fixes it at a known downward tilt over the Raspberry Pi enclosure.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-chassis.jpg" alt="Rover drivetrain during bring-up" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">03</span>The <strong>four-wheel tank drivetrain</strong> during bring-up — a dual-motor H-bridge wired back to the compute and camera before the frame was stacked up.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-tcc-upload.jpg" alt="Training Control Center upload stage" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">04</span>The <strong>Training Control Center</strong> — stage 1 uploads clips per object class (bit, wrench, jenga, screwdriver, car), which are split into frames for labeling.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-tcc-review.jpg" alt="Label review and edit stage" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">05</span>Stage 3 <strong>reviews and edits</strong> auto-generated labels frame by frame, with a leakage-safe split by whole source video so near-identical frames can't inflate metrics.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-detector.jpg" alt="Live YOLO detector test" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">06</span>Stage 5 runs the trained <strong>YOLOv8 detector live</strong> — here locking onto a wrench at ~90% confidence, straight from the browser.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <video src="../assets/projects/rover-demo.mp4" poster="../assets/projects/rover-demo-poster.jpg" controls preload="none" playsinline muted></video>
+                </div>
+                <figcaption><span class="gcap-k">07</span><strong>Live demo</strong> — the ROS 2 perception pipeline running end to end: the detector locks a target class while the control node streams velocity commands and an odometry mini-map traces the path.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/rover-target.jpg" alt="Rover approaching a target object" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">08</span>Closing the loop: the rover <strong>approaches a real target</strong> — a toy car on the floor — driving on its own detections rather than a scripted path.</figcaption>
+              </figure>
+            </div>
+          </div>
+          <button class="gbtn gnext" aria-label="Next slide">→</button>
+          <div class="gfoot">
+            <div class="gdots"></div>
+            <div class="gcount"><span class="gnow">1</span> / <span class="gtotal">8</span></div>
+          </div>
+        </div>
+      </section>
 
       <section>
         <h2>Overview</h2>
@@ -63,32 +129,32 @@
         <div class="sect-rule"></div>
         <div class="feature-grid">
           <div class="feature">
-            <div class="feature-ic">📐</div>
+            <div class="feature-ic">01</div>
             <h3>Mechanical design (CAD)</h3>
             <p>Custom SolidWorks parts — a Pi enclosure with cooling clearance, an angled camera mount, a chassis bridge, and a collection funnel — modeled parametrically and exported to STL/STEP for 3D printing.</p>
           </div>
           <div class="feature">
-            <div class="feature-ic">⚡</div>
+            <div class="feature-ic">02</div>
             <h3>Embedded / electrical</h3>
             <p>Arduino firmware driving a dual-motor H-bridge over PWM; a non-blocking, timer-based motion controller with calibrated in-place turns; a relay-driven electromagnet end-effector; a Pi ↔ Arduino serial link.</p>
           </div>
           <div class="feature">
-            <div class="feature-ic">🎯</div>
+            <div class="feature-ic">03</div>
             <h3>Sensing &amp; controls</h3>
             <p>Closed-loop wheel odometry from a TCRT5000 IR encoder with real signal-conditioning, differential-drive kinematics, and a native ROS 2 Humble control stack.</p>
           </div>
           <div class="feature">
-            <div class="feature-ic">👁️</div>
+            <div class="feature-ic">04</div>
             <h3>Computer vision / ML</h3>
             <p>A YOLOv8 detector trained on self-recorded data (bit, wrench, jenga, screwdriver, car) with a human-in-the-loop labeling and retraining workflow.</p>
           </div>
           <div class="feature">
-            <div class="feature-ic">🔁</div>
+            <div class="feature-ic">05</div>
             <h3>Software / MLOps</h3>
             <p>An 8-stage Training Control Center that owns upload → auto-label → review → versioned training → live test → hard-negative retraining → deploy, with a model registry and leakage-safe dataset splitting.</p>
           </div>
           <div class="feature">
-            <div class="feature-ic">🧩</div>
+            <div class="feature-ic">06</div>
             <h3>Systems integration</h3>
             <p>Four subsystems — perception, mobility, manipulation, and control — composed on real hardware through clean, swappable interfaces.</p>
           </div>
@@ -235,10 +301,11 @@
   </main>
 
   <footer>
-    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+    © 2026 Leonardo Ragogna · Berkeley, CA
   </footer>
 
 
   <script src="../js/cursor.js"></script>
+  <script src="../js/gallery.js"></script>
 </body>
 </html>

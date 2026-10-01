@@ -32,7 +32,7 @@
         application for creating, recording, reviewing, and exporting study data.
       </p>
       <div class="proj-meta">
-        <span>🏭 Dytran Instruments — Hottinger Brüel &amp; Kjær</span>
+        <span>Dytran Instruments — Hottinger Brüel &amp; Kjær</span>
         <span class="sep">·</span>
         <span>Engineering Intern · Summer 2026</span>
       </div>
@@ -43,6 +43,72 @@
     </header>
 
     <div class="proj-body">
+
+      <section class="proj-gallery">
+        <h2>Walkthrough</h2>
+        <div class="sect-rule"></div>
+        <p class="gintro">A walk through the system — from the <strong>KiCad schematic and PCB</strong> to the <strong>assembled handheld device</strong>, its on-device interface, and a <strong>live demo</strong>.</p>
+        <div class="gallery" data-gallery>
+          <button class="gbtn gprev" aria-label="Previous slide">←</button>
+          <div class="gviewport">
+            <div class="gtrack">
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-schematic.png" alt="KiCad schematic of the ESP32 interface board" loading="eager" fetchpriority="high" />
+                </div>
+                <figcaption><span class="gcap-k">01</span>The <strong>schematic</strong> (KiCad): an ESP32 driving a TFT display, a three-button interface, a buzzer, and a battery/switch power path.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-pcb-layout.png" alt="KiCad PCB layout of the interface board" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">02</span>The <strong>custom interface PCB</strong> laid out in KiCad — ESP32 headers, the three button connectors, the display header, and power components.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-pcb-3d.png" alt="3D render of the interface PCB" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">03</span>The board's <strong>3D view</strong>, used to check component placement and mechanical fit before fabrication.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-internal.jpg" alt="Internal electronics of the device" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">04</span>The <strong>internal electronics</strong> — the ESP32 on the interface PCB, battery hardware, and wiring packed into the enclosure.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-device.jpg" alt="The assembled handheld time-study device" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">05</span>The <strong>assembled handheld terminal</strong> in its SolidWorks-designed, 3D-printed enclosure — a 3.2″ display, three buttons, and a power switch.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-ui-select.jpg" alt="On-device study selection screen" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">06</span>The <strong>on-device interface</strong> — operators pick a study with the three physical buttons, no keyboard required.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/esp32-ui-timing.jpg" alt="On-device step timing screen" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">07</span><strong>Timing a step</strong> — the terminal shows the current step and description, accumulates elapsed time, and records each operation.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <video src="../assets/projects/esp32-demo.mp4" poster="../assets/projects/esp32-demo-poster.jpg" controls preload="none" playsinline muted></video>
+                </div>
+                <figcaption><span class="gcap-k">08</span><strong>Live demo</strong> — selecting a study on the device and timing its steps end to end.</figcaption>
+              </figure>
+            </div>
+          </div>
+          <button class="gbtn gnext" aria-label="Next slide">→</button>
+          <div class="gfoot">
+            <div class="gdots"></div>
+            <div class="gcount"><span class="gnow">1</span> / <span class="gtotal">8</span></div>
+          </div>
+        </div>
+      </section>
 
       <section>
         <h2>Engineering outcome</h2>
@@ -168,10 +234,11 @@
   </main>
 
   <footer>
-    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+    © 2026 Leonardo Ragogna · Berkeley, CA
   </footer>
 
 
   <script src="../js/cursor.js"></script>
+  <script src="../js/gallery.js"></script>
 </body>
 </html>

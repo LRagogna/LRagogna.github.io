@@ -33,7 +33,7 @@
         gestures, and broadcasts results over WebSocket.
       </p>
       <div class="proj-meta">
-        <span>🧠 Neurotech @ Berkeley — Flex-EMG</span>
+        <span>Neurotech @ Berkeley — Flex-EMG</span>
         <span class="sep">·</span>
         <span>Devices Hardware Engineer · Spring 2026</span>
       </div>
@@ -44,6 +44,66 @@
     </header>
 
     <div class="proj-body">
+
+      <section class="proj-gallery">
+        <h2>Walkthrough</h2>
+        <div class="sect-rule"></div>
+        <p class="gintro">Click through the build — from the <strong>KiCad schematic</strong> through the <strong>fabricated board, in-house reflow assembly, and microscope inspection</strong>.</p>
+        <div class="gallery" data-gallery>
+          <button class="gbtn gprev" aria-label="Previous slide">←</button>
+          <div class="gviewport">
+            <div class="gtrack">
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-schematic.png" alt="KiCad schematic of the EMG analog front-end" loading="eager" fetchpriority="high" />
+                </div>
+                <figcaption><span class="gcap-k">01</span>The <strong>analog front-end schematic</strong> (KiCad): an AD8226 instrumentation amp into an active filter chain and a 24-bit ADS1220 ADC, with an MCP4141 digital-pot programmable-gain stage.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-breadboard.jpg" alt="Breadboard prototype of the front-end" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">02</span>First light: the front-end <strong>prototyped on a breadboard</strong>, validating the signal chain against the schematic before committing to a fabricated board.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-pcb.jpg" alt="Fabricated Flex-EMG PCB" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">03</span>The <strong>fabricated Flex-EMG board</strong> back from the fab — a compact analog front-end laid out in KiCad, ready to populate.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-reflow.jpg" alt="Reflow soldering station" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">04</span><strong>In-house SMD assembly</strong> — paste, place, and reflow on an infrared oven, with scopes and a rework iron on the bench for touch-ups.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-inspection.jpg" alt="Assembly inspection" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">05</span>Post-reflow <strong>inspection</strong> of the populated board — checking joints and placement before power-on.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-microscope-layout.jpg" alt="Board layout under a microscope" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">06</span>Reviewing the <strong>board layout under a microscope camera</strong> — tracing nets and confirming footprints against the design.</figcaption>
+              </figure>
+              <figure class="gslide">
+                <div class="gmedia">
+                  <img src="../assets/projects/emg-microscope-components.jpg" alt="Placed components under a microscope" loading="lazy" />
+                </div>
+                <figcaption><span class="gcap-k">07</span>Close-up of the placed parts — the <strong>ADS1220 ADC</strong> and the amplifier/filter stages — verified under magnification before bring-up.</figcaption>
+              </figure>
+            </div>
+          </div>
+          <button class="gbtn gnext" aria-label="Next slide">→</button>
+          <div class="gfoot">
+            <div class="gdots"></div>
+            <div class="gcount"><span class="gnow">1</span> / <span class="gtotal">7</span></div>
+          </div>
+        </div>
+      </section>
 
       <section>
         <h2>How it works</h2>
@@ -154,10 +214,11 @@
   </main>
 
   <footer>
-    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+    © 2026 Leonardo Ragogna · Berkeley, CA
   </footer>
 
 
   <script src="../js/cursor.js"></script>
+  <script src="../js/gallery.js"></script>
 </body>
 </html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sourcecado — AI Sourcing Agent · Leonardo Ragogna</title>
+  <meta name="description" content="Sourcecado is a local-first AI 'sourcing director' desktop app that finds candidates, drafts tailored outreach, and maintains hand-off-ready person files — spanning a Python/FastAPI backend, a React + TypeScript frontend, and a Rust/Tauri macOS shell, with an auditable LLM agent loop and human-in-the-loop approval gates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/project.css" />
+</head>
+<body>
+
+  <nav class="proj-nav">
+    <div class="wrap">
+      <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to projects</a>
+      <div class="brand">Leonardo<span>.</span></div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <header class="proj-hero">
+      <div class="tag">AI Agents · Full-Stack</div>
+      <h1>Sourcecado — AI Sourcing Agent</h1>
+      <p class="proj-lead">
+        A <strong>local-first AI "sourcing director"</strong> desktop app that finds candidates, drafts
+        tailored outreach, and maintains hand-off-ready person files. It spans a Python/FastAPI backend,
+        a React + TypeScript frontend, and a Rust/Tauri macOS shell — built around an auditable
+        <strong>LLM tool-calling agent loop</strong> with human-in-the-loop approval gates.
+      </p>
+      <div class="proj-meta">
+        <span>Codeology — UC Berkeley</span>
+        <span class="sep">·</span>
+        <span>Developer · Aug 2026 – Present</span>
+      </div>
+      <div class="proj-actions">
+        <a class="btn btn-ghost" href="../index.html#projects">All projects</a>
+        <a class="btn btn-ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+    </header>
+
+    <div class="proj-body">
+
+      <section>
+        <h2>Overview</h2>
+        <div class="sect-rule"></div>
+        <p>
+          Sourcecado is an AI agent that runs recruiting sourcing end-to-end, packaged as a
+          <strong>local-first desktop app</strong> so sensitive candidate data never leaves the user's
+          machine. It finds candidates, drafts outreach tailored to each person, and keeps a clean,
+          hand-off-ready file on everyone it touches. The design principle throughout is
+          <strong>trust</strong>: the agent proposes, a human approves, and every step it takes is written
+          down and reviewable after the fact.
+        </p>
+      </section>
+
+      <section>
+        <h2>What it does</h2>
+        <div class="sect-rule"></div>
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-ic">01</div>
+            <h3>Finds candidates</h3>
+            <p>Searches and enriches candidate profiles, assembling structured, hand-off-ready person files a recruiter can act on immediately.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">02</div>
+            <h3>Drafts outreach</h3>
+            <p>Writes tailored outreach per candidate, held behind an approval gate so nothing is sent without a human in the loop.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">03</div>
+            <h3>Connects the stack</h3>
+            <p>MCP/OAuth connectors to Gmail, Drive, Calendar, and Apollo let the agent read context and act across real tools.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">04</div>
+            <h3>Stays auditable</h3>
+            <p>An auditable run ledger records every tool call, with secret redaction that keeps PII and credentials out of logs.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">05</div>
+            <h3>Runs locally</h3>
+            <p>A Rust/Tauri macOS shell wraps the React frontend and Python backend into a single local-first desktop app.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-ic">06</div>
+            <h3>Ships safely</h3>
+            <p>1,600+ tests and a 3-stage CI pipeline gate every release, ending in signed, notarized builds with auto-update.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>The agent loop</h2>
+        <div class="sect-rule"></div>
+        <p>
+          Sourcecado runs an <strong>LLM tool-calling loop</strong>: the model plans, calls a tool,
+          observes the result, and repeats — but outbound actions pause at an approval gate, and the whole
+          run is written to a ledger as it goes.
+        </p>
+        <div class="flow">
+          <div class="flow-step"><div class="fs-k">Plan</div><div class="fs-t">LLM agent</div><div class="fs-d">decides the next tool call</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Act</div><div class="fs-t">MCP / OAuth tools</div><div class="fs-d">Gmail · Drive · Calendar · Apollo</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Gate</div><div class="fs-t">Human approval</div><div class="fs-d">before anything is sent</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><div class="fs-k">Record</div><div class="fs-t">Run ledger</div><div class="fs-d">redacted, auditable trail</div></div>
+        </div>
+        <div class="callout">
+          <strong>Proposes, then waits.</strong> The agent can do the legwork autonomously, but a person
+          signs off on every outbound step — and can reconstruct exactly what happened from the ledger.
+        </div>
+      </section>
+
+      <section>
+        <h2>Engineering &amp; quality</h2>
+        <div class="sect-rule"></div>
+        <ul class="proj-list">
+          <li>Built a <strong>local-first desktop app</strong> spanning a Python/FastAPI backend, a React + TypeScript frontend, and a Rust/Tauri macOS shell.</li>
+          <li>Engineered an <strong>LLM tool-calling agent loop</strong> with an auditable run ledger, human-in-the-loop approval gates, and secret redaction to keep PII out of logs.</li>
+          <li>Wired <strong>MCP/OAuth connectors</strong> to Gmail, Drive, Calendar, and Apollo for real-tool context and actions.</li>
+          <li>Wrote <strong>1,600+ automated tests</strong> and a 3-stage GitHub Actions CI pipeline covering pytest, LLM behavioral evals, Vitest, Rust clippy, and pip-audit scanning.</li>
+          <li>Shipped <strong>signed, notarized releases with auto-update</strong>, so builds reach users safely.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Tech stack</h2>
+        <div class="sect-rule"></div>
+        <div class="stack-block">
+          <div class="stack-row">
+            <div class="stack-label">Backend &amp; agent</div>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">FastAPI</span>
+              <span class="chip">LLM tool calling</span>
+              <span class="chip">MCP</span>
+              <span class="chip">OAuth 2.0</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Frontend &amp; shell</div>
+            <div class="chips">
+              <span class="chip">React</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Rust</span>
+              <span class="chip">Tauri</span>
+            </div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-label">Testing &amp; delivery</div>
+            <div class="chips">
+              <span class="chip">pytest</span>
+              <span class="chip">Vitest</span>
+              <span class="chip">LLM evals</span>
+              <span class="chip">GitHub Actions CI</span>
+              <span class="chip">pip-audit</span>
+              <span class="chip">Signed / notarized builds</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="proj-foot">
+        <a class="back-link" href="../index.html#projects"><span class="arrow">←</span> Back to all projects</a>
+        <a class="btn btn-ghost" href="../index.html#contact">Get in touch</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    © 2026 Leonardo Ragogna · Berkeley, CA
+  </footer>
+
+
+  <script src="../js/cursor.js"></script>
+</body>
+</html>

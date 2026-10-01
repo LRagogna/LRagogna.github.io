@@ -54,7 +54,7 @@
   <header>
     <div class="wrap hero">
       <div class="hero-text">
-        <div class="badge"><span class="dot"></span> Incoming Researcher @ ARPL</div>
+        <div class="badge"><span class="dot"></span> Undergraduate Researcher @ ARPL × BAIR</div>
         <h1>Leonardo Ragogna</h1>
         <p class="tagline">
           EECS student at UC&nbsp;Berkeley building at the intersection of
@@ -93,18 +93,19 @@
       </div>
       <div class="about">
         I'm a <strong>B.S. Electrical Engineering &amp; Computer Sciences</strong> student at
-        UC&nbsp;Berkeley, and an <strong>incoming researcher at ARPL</strong>. My work spans
-        low-noise circuit design, autonomous robotics on ROS&nbsp;2, and Python data pipelines — from
-        hardware benches and PCB spins to computer-vision models and production-line automation. I like
-        problems that live where <strong>hardware meets software</strong>, and I care about building things
-        that are measured, reliable, and genuinely useful.
+        UC&nbsp;Berkeley and an <strong>undergraduate researcher at ARPL&nbsp;×&nbsp;BAIR</strong>, where I
+        build autonomy hardware for an autonomous RC car. My work spans low-noise circuit design, autonomous
+        robotics on ROS&nbsp;2, AI agents, and Python data pipelines — from hardware benches and PCB spins to
+        computer-vision models and production-line automation. I like problems that live where
+        <strong>hardware meets software</strong>, and I care about building things that are measured,
+        reliable, and genuinely useful.
       </div>
       <div class="facts facts-3">
         <div class="fact" data-tilt>
-          <b class="locked-gpa" data-value="3.81">🔒</b>
+          <b class="locked-gpa" data-value="3.81">•••</b>
           <span>GPA / 4.0</span>
         </div>
-        <div class="fact" data-tilt><b>7</b><span>Research, industry &amp; service roles</span></div>
+        <div class="fact" data-tilt><b>8</b><span>Research, industry &amp; service roles</span></div>
         <div class="fact" data-tilt><b>4</b><span>Languages spoken</span></div>
       </div>
     </section>
@@ -119,6 +120,19 @@
         <div class="rule"></div>
       </div>
       <div class="timeline">
+
+        <div class="job">
+          <div class="job-top">
+            <h3>Agile Robotics &amp; Perception Lab (ARPL × BAIR)</h3>
+            <div class="when">Sep 2026 – Present · Berkeley, CA</div>
+          </div>
+          <div class="role">Undergraduate Researcher</div>
+          <ul>
+            <li>Designing the electrical layout for an autonomous RC car — planning power distribution and wiring for compute, sensors, and motors.</li>
+            <li>Modeling component mounting and packaging in SolidWorks to integrate the autonomy hardware stack onto the RC chassis.</li>
+            <li>Implementing filtering on onboard sensor data to reduce noise in the signals driving autonomous movement.</li>
+          </ul>
+        </div>
 
         <div class="job">
           <div class="job-top">
@@ -225,6 +239,21 @@
         <div class="rule"></div>
       </div>
       <div class="cards">
+        <a class="card" data-tilt href="projects/sourcecado.html">
+          <span class="card-glare" aria-hidden="true"></span>
+          <div class="card-inner">
+            <div class="tag">AI Agents · Full-Stack</div>
+            <h3>Sourcecado — AI Sourcing Agent</h3>
+            <p>A local-first desktop app that finds candidates, drafts outreach, and keeps hand-off-ready files — an auditable LLM agent loop with human approval gates.</p>
+            <div class="chips">
+              <span class="chip">FastAPI</span>
+              <span class="chip">React / TS</span>
+              <span class="chip">Rust / Tauri</span>
+              <span class="chip">LLM Agents · MCP</span>
+            </div>
+            <span class="card-cta">View project <span class="arrow">→</span></span>
+          </div>
+        </a>
         <a class="card" data-tilt href="projects/autonomous-sorting-rover.html">
           <span class="card-glare" aria-hidden="true"></span>
           <div class="card-inner">
@@ -270,21 +299,6 @@
             <span class="card-cta">View project <span class="arrow">→</span></span>
           </div>
         </a>
-        <a class="card" data-tilt href="projects/bart-traction-power.html">
-          <span class="card-glare" aria-hidden="true"></span>
-          <div class="card-inner">
-            <div class="tag">Systems · Data</div>
-            <h3>BART Traction-Power Pipelines</h3>
-            <p>Python + SQL pipelines that clean SCADA telemetry and standardize energy metrics across electrical phases for reliability research.</p>
-            <div class="chips">
-              <span class="chip">Python</span>
-              <span class="chip">SQL</span>
-              <span class="chip">Jupyter</span>
-              <span class="chip">Data QA</span>
-            </div>
-            <span class="card-cta">View project <span class="arrow">→</span></span>
-          </div>
-        </a>
       </div>
     </section>
 
@@ -299,37 +313,52 @@
       </div>
       <div class="skill-grid">
         <div class="skill-col" data-tilt>
-          <h4><span class="ic">⚙️</span> Engineering</h4>
+          <h4>Hardware</h4>
           <div class="chips">
-            <span class="chip">SolidWorks</span>
             <span class="chip">KiCad</span>
             <span class="chip">Altium</span>
             <span class="chip">LTspice</span>
-            <span class="chip">SketchUp</span>
-            <span class="chip">Gazebo</span>
-            <span class="chip">Isaac Sim</span>
-            <span class="chip">Microcontrollers</span>
+            <span class="chip">SolidWorks</span>
+            <span class="chip">PCB Design</span>
+            <span class="chip">Active Filters</span>
+            <span class="chip">ESP32</span>
+            <span class="chip">Arduino</span>
             <span class="chip">Raspberry Pi</span>
+            <span class="chip">Oscilloscopes</span>
           </div>
         </div>
         <div class="skill-col" data-tilt>
-          <h4><span class="ic">💻</span> Software</h4>
+          <h4>Software</h4>
           <div class="chips">
             <span class="chip">Python</span>
             <span class="chip">C / C++</span>
+            <span class="chip">Rust</span>
+            <span class="chip">TypeScript / React</span>
             <span class="chip">Java</span>
-            <span class="chip">Assembly</span>
-            <span class="chip">ROS 2</span>
-            <span class="chip">PyTorch</span>
-            <span class="chip">OpenCV</span>
             <span class="chip">SQL</span>
+            <span class="chip">FastAPI</span>
             <span class="chip">Linux</span>
             <span class="chip">Git</span>
             <span class="chip">Docker</span>
+            <span class="chip">CI/CD</span>
           </div>
         </div>
         <div class="skill-col" data-tilt>
-          <h4><span class="ic">🌐</span> Languages</h4>
+          <h4>Robotics &amp; AI</h4>
+          <div class="chips">
+            <span class="chip">ROS 2</span>
+            <span class="chip">Gazebo</span>
+            <span class="chip">Isaac Sim</span>
+            <span class="chip">PyTorch</span>
+            <span class="chip">OpenCV</span>
+            <span class="chip">YOLO</span>
+            <span class="chip">Sensor Filtering</span>
+            <span class="chip">LLM Agents</span>
+            <span class="chip">MCP</span>
+          </div>
+        </div>
+        <div class="skill-col" data-tilt>
+          <h4>Languages</h4>
           <div class="langs">
             <div class="lang-row"><span>English</span><span>Native</span></div>
             <div class="lang-row"><span>Spanish</span><span>C2 · Fluent</span></div>
@@ -351,19 +380,19 @@
       </div>
       <div class="orgs">
         <div class="org-card" data-tilt>
-          <div class="org-ic">🤝</div>
+          <div class="org-ic"></div>
           <h3>Alpha Sigma Phi</h3>
           <div class="org-role">VP of Service &amp; Philanthropy</div>
           <p>Lead chapter service and fundraising — planning philanthropy events, coordinating volunteers, and partnering with community organizations.</p>
         </div>
         <div class="org-card" data-tilt>
-          <div class="org-ic">💾</div>
+          <div class="org-ic"></div>
           <h3>Codeology</h3>
-          <div class="org-role">Member · Software Development</div>
-          <p>Berkeley's project-based software development club, building full-stack applications with a team through a semester-long development cycle.</p>
+          <div class="org-role">Developer · Software Development</div>
+          <p>Berkeley's project-based software development club. Building <strong>Sourcecado</strong>, a local-first AI sourcing agent, across a full-stack Python, React/TypeScript, and Rust/Tauri desktop app.</p>
         </div>
         <div class="org-card" data-tilt>
-          <div class="org-ic">🧠</div>
+          <div class="org-ic"></div>
           <h3>Neurotech@Berkeley</h3>
           <div class="org-role">Devices Hardware Engineer</div>
           <p>Design and test low-noise analog front ends for EMG biosignal acquisition — active filtering, ADC interfacing, and iterative PCB spins.</p>
@@ -382,7 +411,7 @@
       </div>
       <div class="edu">
         <div class="edu-card" data-tilt>
-          <span class="gpa locked-gpa" data-value="3.81 / 4.0">🔒</span>
+          <span class="gpa locked-gpa" data-value="3.81 / 4.0">•••</span>
           <h3>UC Berkeley</h3>
           <div class="sub">B.S. Electrical Engineering &amp; Computer Sciences</div>
           <ul class="award-list">
@@ -411,7 +440,7 @@
 
         <!-- Lock gate -->
         <div class="lock-gate" id="lockGate">
-          <div class="lock-ic">🔒</div>
+          <div class="lock-ic"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg></div>
           <h4>This section is locked</h4>
           <p>My cumulative GPA and full term-by-term coursework are hidden. Enter the secret keyword to unlock them.</p>
           <form class="lock-form" id="lockForm" autocomplete="off">
@@ -489,7 +518,7 @@
   </main>
 
   <footer>
-    © 2026 Leonardo Ragogna · Berkeley, CA · Built with care ☕
+    © 2026 Leonardo Ragogna · Berkeley, CA
   </footer>
 
   <script src="js/cursor.js"></script>
