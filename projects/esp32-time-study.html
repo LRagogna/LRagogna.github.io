@@ -26,10 +26,10 @@
       <div class="tag">Embedded · Analytics</div>
       <h1>Portable ESP32 Time-Study System</h1>
       <p class="proj-lead">
-        An end-to-end engineering project that turns production instructions into
-        <strong>portable, operator-controlled time studies</strong>. The system combines a battery-powered
-        ESP32 terminal, custom electronics and enclosure design, embedded firmware, and a Windows desktop
-        application for creating, recording, reviewing, and exporting study data.
+        An end-to-end system that turns production instructions into
+        <strong>portable, operator-controlled time studies</strong> — a battery-powered ESP32 terminal with
+        custom electronics, enclosure, and firmware, plus a Windows app to create, record, review, and export
+        study data.
       </p>
       <div class="proj-meta">
         <span>Dytran Instruments — Hottinger Brüel &amp; Kjær</span>
@@ -114,10 +114,10 @@
         <h2>Engineering outcome</h2>
         <div class="sect-rule"></div>
         <p>
-          This project replaced a centralized, manually coordinated timing process with a portable workflow
-          that can be used directly at the workstation. A single system now supports the full path from study
-          creation to recorded results — integrating mechanical design, electronics, embedded programming,
-          desktop software, serial communication, and structured data export into one deployable tool.
+          This replaced a centralized, manually coordinated timing process with a portable workflow used right
+          at the workstation. One system now covers the full path from study creation to recorded results —
+          mechanical design, electronics, embedded programming, desktop software, serial comms, and structured
+          export in one deployable tool.
         </p>
         <div class="flow">
           <div class="flow-step"><div class="fs-k">1 · Select</div><div class="fs-t">Study document</div><div class="fs-d">sanitized Job Traveler</div></div>
@@ -151,10 +151,10 @@
         <h2>Hardware</h2>
         <div class="sect-rule"></div>
         <p>
-          The custom AFE packages the ESP32, display, physical controls, battery hardware, and interface
-          electronics into a portable 3D-printed enclosure. A custom interface PCB organizes the ESP32 headers,
-          display and control connections, power components, and enclosure mounting points; the 3D board view
-          was used to review component placement and mechanical integration before assembly.
+          The device packages the ESP32, display, controls, battery, and interface electronics into a portable
+          3D-printed enclosure. A custom interface PCB organizes the ESP32 headers, display and control
+          connections, power components, and mounting points; the 3D board view checked placement and mechanical
+          fit before assembly.
         </p>
         <ul class="proj-list">
           <li><strong>ESP32-D DevKit</strong> development board</li>
@@ -170,24 +170,22 @@
 
         <h3>ESP32 firmware</h3>
         <p>
-          The firmware provides the on-device workflow and file-management layer: it displays stored studies and
-          step information, uses physical buttons for menu navigation and timing control, accumulates elapsed time
-          for each operation, stores study definitions and results as CSV files, and responds to commands from the
-          desktop application over a 115200-baud serial connection.
+          The firmware runs the on-device workflow and file management: it shows stored studies and steps, uses
+          physical buttons for navigation and timing, accumulates elapsed time per operation, stores definitions
+          and results as CSV, and answers the desktop app over a 115200-baud serial link.
         </p>
 
         <h3>Windows Study Manager</h3>
         <p>
-          The desktop application is written in Python and uses a local HTML/CSS/JavaScript interface through
-          <code>pywebview</code>. It provides four main workflows: a <strong>Home</strong> screen that detects the
-          connected ESP32 and shows device status; <strong>Create Study</strong>, which parses a study document,
-          previews its steps, and uploads the final study; <strong>Current Studies</strong>, which lists stored CSV
-          files and previews recorded results; and <strong>Export</strong>, which combines selected studies into an
-          Excel workbook with one worksheet per study.
+          A Python desktop app with a local HTML/CSS/JS interface via <code>pywebview</code>, with four workflows:
+          <strong>Home</strong> detects the connected ESP32 and shows status; <strong>Create Study</strong> parses
+          a study document, previews steps, and uploads; <strong>Current Studies</strong> lists stored CSVs and
+          previews results; and <strong>Export</strong> combines studies into an Excel workbook, one worksheet
+          each.
         </p>
         <div class="callout">
-          Results use a straightforward CSV structure — <strong>step number, description, and time (mm:ss)</strong> —
-          keeping the device implementation lightweight while making the data easy to inspect, archive, and analyze.
+          Results use a simple CSV structure — <strong>step number, description, time (mm:ss)</strong> — keeping
+          the device lightweight and the data easy to inspect, archive, and analyze.
         </div>
       </section>
 

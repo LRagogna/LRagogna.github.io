@@ -26,11 +26,10 @@
       <div class="tag">Biosignals · Hardware</div>
       <h1>Flex-EMG Acquisition System</h1>
       <p class="proj-lead">
-        A wearable surface-electromyography (sEMG) platform that <strong>reads muscle activity from the
-        forearm</strong>, cleans it with a real-time digital filter chain, and classifies hand gestures using a
-        lightweight machine-learning model. It spans the full stack: a custom analog front-end PCB, ESP32
-        firmware that streams ADC samples over WiFi, and a Python backend that filters the signal, recognizes
-        gestures, and broadcasts results over WebSocket.
+        A wearable sEMG platform that <strong>reads forearm muscle activity</strong>, cleans it with a real-time
+        filter chain, and classifies hand gestures with a lightweight ML model. Full stack: a custom analog
+        front-end PCB, ESP32 firmware streaming ADC samples over WiFi, and a Python backend that filters,
+        recognizes gestures, and broadcasts over WebSocket.
       </p>
       <div class="proj-meta">
         <span>Neurotech @ Berkeley — Flex-EMG</span>
@@ -150,10 +149,10 @@
         <h2>Software — signal processing &amp; ML</h2>
         <div class="sect-rule"></div>
         <p>
-          The Python backend is a modular real-time pipeline. A single config module is the source of truth for
-          sample rate, filter, and connection settings; the signal processor applies a bandpass (20–500 Hz) plus a
-          60 Hz notch filter chain using SciPy SOS; the ESP32 client reads over WiFi/serial with auto-reconnect;
-          and the classifier turns the cleaned signal into gestures.
+          The Python backend is a modular real-time pipeline. One config module holds sample rate, filter, and
+          connection settings; the signal processor applies a 20–500 Hz bandpass plus 60 Hz notch via SciPy SOS;
+          the ESP32 client reads over WiFi/serial with auto-reconnect; and the classifier turns the cleaned
+          signal into gestures.
         </p>
         <ul class="proj-list">
           <li><strong>Real-time filtering</strong> — 20–500 Hz bandpass + 60 Hz notch (SciPy second-order sections).</li>

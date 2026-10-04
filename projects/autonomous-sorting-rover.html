@@ -26,10 +26,10 @@
       <div class="tag">Robotics · Independent</div>
       <h1>Autonomous Object-Sorting Rover</h1>
       <p class="proj-lead">
-        A ground-up autonomous robot that <strong>finds real-world objects with a custom-trained
-        vision model</strong>, drives to them with closed-loop wheel odometry, and collects them.
-        It spans mechanical CAD, embedded firmware, motion control, and a full computer-vision pipeline —
-        four subsystems designed to compose on real hardware through clean, swappable interfaces.
+        A ground-up autonomous robot that <strong>finds objects with a custom-trained vision model</strong>,
+        drives to them with closed-loop odometry, and collects them. Four subsystems — mechanical CAD, embedded
+        firmware, motion control, and a computer-vision pipeline — composed on real hardware through clean,
+        swappable interfaces.
       </p>
       <div class="proj-meta">
         <span>Perception · Mobility · Manipulation · Control</span>
@@ -114,13 +114,12 @@
         <h2>Overview</h2>
         <div class="sect-rule"></div>
         <p>
-          This is the complete engineering record of an autonomous rover: the SolidWorks parts, the
-          Arduino motor and sensor firmware, a ROS 2 control stack, a custom-trained YOLO object detector,
-          and a browser-based MLOps platform that runs the entire data-to-deployment loop. The seams
-          between subsystems are deliberate — perception publishes detections, control converts intent to a
-          body-frame velocity, and the drive layer turns that velocity into motor commands. Each boundary is
-          a single, well-defined interface, so any one subsystem can be swapped or simulated without touching
-          the others.
+          The complete engineering record of an autonomous rover: SolidWorks parts, Arduino motor and sensor
+          firmware, a ROS 2 control stack, a custom-trained YOLO detector, and a browser-based MLOps platform
+          running the full data-to-deployment loop. The seams are deliberate — perception publishes detections,
+          control converts intent to a body-frame velocity, and the drive layer turns that into motor commands.
+          Each boundary is one well-defined interface, so any subsystem can be swapped or simulated without
+          touching the others.
         </p>
       </section>
 
@@ -186,63 +185,58 @@
 
         <h3>1 · Mechanical design — SolidWorks</h3>
         <p>
-          Every custom bracket on the rover is designed in SolidWorks rather than improvised, so the
-          mechanical layout evolves in lockstep with the electronics: a fixed Raspberry Pi 4 mount with
-          cooling clearance, an angled mount that fixes the OV5647 at a controlled downward tilt so the
-          detector always sees the ground plane from a known viewpoint, a structural chassis bridge, and a
-          collection funnel. Parts are authored natively and exported to neutral STL/STEP for printing and
-          sharing, keeping the design reproducible.
+          Every bracket is designed in SolidWorks, so the mechanical layout evolves in lockstep with the
+          electronics: a Raspberry Pi 4 mount with cooling clearance, an angled OV5647 mount that fixes a
+          downward tilt so the detector always sees the ground plane from a known viewpoint, a chassis bridge,
+          and a collection funnel. Parts export to neutral STL/STEP, keeping the design reproducible.
         </p>
 
         <h3>2 · Electronics &amp; embedded firmware</h3>
         <p>
-          The Arduino runs a <strong>non-blocking</strong> motion controller — no <code>delay()</code> anywhere
-          in the control loop — so serial input is always responsive and a turn can be aborted mid-motion. It
-          drives a dual H-bridge with separate cruise and turn PWM levels chosen so the wheels scrub cleanly
-          instead of stalling, and executes in-place turns from a single measured "milliseconds per 90°"
-          calibration constant that scales to any commanded angle. A relay-controlled electromagnet
-          end-effector collects metal objects.
+          The Arduino runs a <strong>non-blocking</strong> motion controller — no <code>delay()</code> in the
+          control loop — so serial input stays responsive and a turn can be aborted mid-motion. It drives a dual
+          H-bridge with separate cruise and turn PWM levels so the wheels scrub cleanly instead of stalling, and
+          turns in place from a single measured "ms per 90°" constant that scales to any angle. A relay-driven
+          electromagnet collects metal objects.
         </p>
 
         <h3>3 · Wheel odometry — closed-loop distance control</h3>
         <p>
-          To turn "go forward one foot" into a <em>measured</em> foot, the rover reads a TCRT5000 IR
-          reflectance sensor watching tape marks on a 2.6″ wheel. Geometry gives
-          <code>inches_per_pulse = π · diameter / pulses_per_rev</code>, so the controller drives until it has
-          counted enough pulses — a genuine closed loop on distance, not a timed guess. A pulse only registers
-          after the sensor reads white continuously for a minimum duration, rejecting glints, seams, and
-          reflections, with an additional pulse-gap guard for proper debouncing.
+          To make "go forward one foot" a <em>measured</em> foot, the rover reads a TCRT5000 IR sensor watching
+          tape marks on a 2.6″ wheel. Geometry gives
+          <code>inches_per_pulse = π · diameter / pulses_per_rev</code>, so it drives until it counts enough
+          pulses — a real closed loop on distance, not a timed guess. A pulse registers only after the sensor
+          reads white for a minimum duration, rejecting glints and seams, with a pulse-gap guard for debouncing.
         </p>
 
         <h3>4 · Motion control &amp; ROS 2</h3>
         <p>
-          A native ROS 2 Humble stack implements both manual teleop and the autonomous perception pipeline.
-          Pure <code>Twist (v, ω) → (left, right)</code> kinematics live in a module with zero ROS or hardware
-          dependencies — which is what makes it reusable, unit-testable, and shared verbatim by the simulated
-          and the real motor node. The perception pipeline is <strong>target-locked</strong>: the rover only
-          approaches the one object class it was told to, never "whatever it happens to see." A live overlay
-          window shows the detection box, the LEFT/RIGHT motor values, a turn/forward/stop indicator, and an
-          odometry mini-map tracing the path. Two workspaces share the same nodes — a development copy on a
-          laptop webcam and an on-robot copy whose <code>arduino_bridge_node</code> writes to the real motors
-          over serial.
+          A native ROS 2 Humble stack runs both manual teleop and the autonomous pipeline. Pure
+          <code>Twist (v, ω) → (left, right)</code> kinematics live in a module with zero ROS or hardware
+          dependencies — reusable, unit-testable, and shared verbatim by the simulated and real motor nodes. The
+          pipeline is <strong>target-locked</strong>: the rover approaches only the class it was told to, never
+          "whatever it sees." A live overlay shows the detection box, LEFT/RIGHT motor values, a
+          turn/forward/stop indicator, and an odometry mini-map. Two workspaces share the same nodes — a
+          laptop-webcam dev copy and an on-robot copy whose <code>arduino_bridge_node</code> drives the real
+          motors over serial.
         </p>
 
         <h3>5 · Perception — custom YOLO detector</h3>
         <p>
-          The detector is trained entirely on the rover's own recordings, not a stock dataset. YOLOv8 is
-          fine-tuned to five classes (bit, wrench, jenga, screwdriver, car) from self-recorded, human-reviewed
-          images across multiple versioned models, and negative/background images are first-class training data
-          so the model is explicitly taught what "nothing" looks like.
+          The detector trains entirely on the rover's own recordings, not a stock dataset. YOLOv8 is fine-tuned
+          to five classes (bit, wrench, jenga, screwdriver, car) from self-recorded, human-reviewed images across
+          versioned models, with negative/background images as first-class data so the model learns what
+          "nothing" looks like.
         </p>
 
         <h3>6 · Training Control Center — an end-to-end ML platform</h3>
         <p>
-          The most substantial piece of software here is a self-built <strong>MLOps platform</strong> that runs
-          the whole model lifecycle from a browser, backed only by the Python standard library. It owns eight
-          stages: upload clips → process dataset (extract frames, auto-draw boxes with classical CV) → review /
-          edit labels → versioned training → test detector → retraining queue (hard-negative mining) → deploy →
-          a guarded danger zone. The train/val split is by whole source video, never by frame, so near-identical
-          frames can't leak across the split and inflate metrics, and models are versioned and never overwritten.
+          The biggest piece of software is a self-built <strong>MLOps platform</strong> that runs the whole model
+          lifecycle from a browser, backed only by the Python standard library. Eight stages: upload clips →
+          process dataset (extract frames, auto-draw boxes with classical CV) → review labels → versioned
+          training → test → retraining queue (hard-negative mining) → deploy → a guarded danger zone. The
+          train/val split is by whole source video, never by frame, so near-identical frames can't leak and
+          inflate metrics, and models are versioned, never overwritten.
         </p>
       </section>
 

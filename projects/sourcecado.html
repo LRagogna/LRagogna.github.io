@@ -27,8 +27,8 @@
       <h1>Sourcecado — AI Sourcing Agent</h1>
       <p class="proj-lead">
         A <strong>local-first AI "sourcing director"</strong> desktop app that finds candidates, drafts
-        tailored outreach, and maintains hand-off-ready person files. It spans a Python/FastAPI backend,
-        a React + TypeScript frontend, and a Rust/Tauri macOS shell — built around an auditable
+        tailored outreach, and keeps hand-off-ready person files. Python/FastAPI backend, React + TypeScript
+        frontend, and a Rust/Tauri macOS shell — built around an auditable
         <strong>LLM tool-calling agent loop</strong> with human-in-the-loop approval gates.
       </p>
       <div class="proj-meta">
@@ -48,12 +48,10 @@
         <h2>Overview</h2>
         <div class="sect-rule"></div>
         <p>
-          Sourcecado is an AI agent that runs recruiting sourcing end-to-end, packaged as a
-          <strong>local-first desktop app</strong> so sensitive candidate data never leaves the user's
-          machine. It finds candidates, drafts outreach tailored to each person, and keeps a clean,
-          hand-off-ready file on everyone it touches. The design principle throughout is
-          <strong>trust</strong>: the agent proposes, a human approves, and every step it takes is written
-          down and reviewable after the fact.
+          Sourcecado runs recruiting sourcing end-to-end as a <strong>local-first desktop app</strong>, so
+          sensitive candidate data never leaves the user's machine. It finds candidates, drafts tailored
+          outreach, and keeps a clean, hand-off-ready file on everyone it touches. The principle throughout is
+          <strong>trust</strong>: the agent proposes, a human approves, and every step is logged and reviewable.
         </p>
       </section>
 
@@ -112,8 +110,8 @@
           <div class="flow-step"><div class="fs-k">Record</div><div class="fs-t">Run ledger</div><div class="fs-d">redacted, auditable trail</div></div>
         </div>
         <div class="callout">
-          <strong>Proposes, then waits.</strong> The agent can do the legwork autonomously, but a person
-          signs off on every outbound step — and can reconstruct exactly what happened from the ledger.
+          <strong>Proposes, then waits.</strong> The agent does the legwork autonomously, but a person signs
+          off on every outbound step — and can reconstruct exactly what happened from the ledger.
         </div>
       </section>
 

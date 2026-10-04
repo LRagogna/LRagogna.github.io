@@ -333,6 +333,35 @@ section { padding: 50px 0; }
 .job ul li { margin-bottom: 7px; }
 .job ul li::marker { color: var(--accent-soft); }
 
+/* Link to the leadership & service roles page */
+.more-exp {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2px 0 0 42px;
+  padding: 10px 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  background: var(--surface);
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+.more-exp:hover { transform: translateY(-2px); border-color: var(--accent); }
+.more-exp .more-exp-ic {
+  font-size: 16px;
+  line-height: 1;
+  transition: transform .25s ease;
+}
+.more-exp:hover .more-exp-ic { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) {
+  .more-exp { transition: none; }
+}
+
 /* ---------- Projects ---------- */
 .cards {
   display: grid;
@@ -558,148 +587,6 @@ section { padding: 50px 0; }
   color: var(--ink-soft);
 }
 .award-list li b { color: var(--ink); font-weight: 600; }
-
-/* ---------- Locked academic record ---------- */
-.record {
-  margin-top: 20px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-.record-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 22px 26px;
-  border-bottom: 1px solid var(--line);
-}
-.record-head h3 {
-  font-family: "Fraunces", serif;
-  margin: 0;
-  font-size: 20px;
-  color: var(--ink);
-}
-.record-head .cum-gpa {
-  font-family: "Fraunces", serif;
-  font-size: 18px;
-  color: var(--accent-deep);
-  font-weight: 600;
-}
-
-.lock-gate { padding: 40px 26px; text-align: center; }
-.lock-gate .lock-ic {
-  width: 56px; height: 56px;
-  margin: 0 auto 14px;
-  border-radius: 16px;
-  display: grid; place-items: center;
-  color: var(--accent-deep);
-  background: var(--surface-alt);
-  border: 1px solid var(--accent-soft);
-}
-.lock-gate h4 {
-  margin: 0 0 6px;
-  font-size: 17px;
-  color: var(--ink);
-  font-family: "Fraunces", serif;
-  font-weight: 600;
-}
-.lock-gate p {
-  margin: 0 auto 20px;
-  max-width: 42ch;
-  color: var(--ink-soft);
-  font-size: 14.5px;
-}
-.lock-form {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.lock-form input {
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  padding: 11px 16px;
-  min-width: 220px;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--ink);
-  outline: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-.lock-form input:focus {
-  border-color: var(--accent-soft);
-  box-shadow: 0 0 0 4px rgba(63,109,158,.16);
-}
-.lock-form button {
-  font-family: "Inter", sans-serif;
-  cursor: pointer;
-  border: none;
-}
-.lock-msg {
-  margin: 14px 0 0;
-  font-size: 13.5px;
-  min-height: 18px;
-  color: #b23b2e;
-  font-weight: 500;
-}
-.lock-err { animation: shake .4s; }
-@keyframes shake {
-  0%,100% { transform: translateX(0); }
-  20%,60% { transform: translateX(-7px); }
-  40%,80% { transform: translateX(7px); }
-}
-
-.record-body { padding: 8px 10px 14px; }
-.term { padding: 16px 16px 6px; }
-.term-name {
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-}
-.term-name .term-note { color: var(--ink-faint); font-weight: 500; letter-spacing: .3px; text-transform: none; font-size: 12.5px; }
-.term table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-.term th {
-  text-align: left;
-  font-size: 11.5px;
-  letter-spacing: .6px;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  font-weight: 600;
-  padding: 4px 8px;
-  border-bottom: 1px solid var(--line);
-}
-.term th.num, .term td.num { text-align: right; white-space: nowrap; }
-.term td {
-  font-size: 14px;
-  color: var(--ink-soft);
-  padding: 8px;
-  border-bottom: 1px solid var(--line);
-}
-.term td .code { color: var(--ink); font-weight: 600; }
-.grade {
-  display: inline-block;
-  min-width: 30px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--accent-deep);
-  background: var(--surface-alt);
-  border: 1px solid var(--accent-soft);
-  border-radius: 999px;
-  padding: 2px 8px;
-}
-.grade.ip { color: var(--ink-faint); background: var(--bg); border-color: var(--line); }
 
 /* ---------- Contact ---------- */
 .contact {
